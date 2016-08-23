@@ -1,1 +1,3 @@
-# ros2_java_examples
+# ROS2 Java examples
+
+This is a collection of examples that use the Java bindings for ROS2
