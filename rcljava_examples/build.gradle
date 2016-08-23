@@ -1,0 +1,29 @@
+apply plugin: 'java'
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+sourceSets {
+    main {
+        if (project.hasProperty('ament.build_space')) {
+            output.classesDir = file(project.getProperty('ament.build_space') + '/classes/main')
+            output.resourcesDir = file(project.getProperty('ament.build_space') + '/resources/main')
+        }
+    }
+}
+
+dependencies {
+    if (project.hasProperty('ament.dependencies')) {
+        project.getProperty('ament.dependencies').split(':').each {
+            compile fileTree(dir: [it, 'java'].join(File.separator), include: '*.jar')
+        }
+    }
+}
+
+jar {
+    if (project.hasProperty('ament.install_space')) {
+        destinationDir = file(
+            [project.getProperty('ament.install_space'), 'share', 'rcljava_examples',
+            'java'].join(File.separator)
+        )
+    }
+}

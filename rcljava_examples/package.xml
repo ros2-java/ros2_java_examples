@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rcljava_examples</name>
+  <version>0.0.0</version>
+  <description>Package containing examples of how to use the rcljava API.</description>
+  <maintainer email="esteve@apache.org">Esteve Fernandez</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_export_jars</buildtool_depend>
+  <buildtool_depend>ament_build_type_gradle</buildtool_depend>
+
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <buildtool_depend>rosidl_generator_java</buildtool_depend>
+
+  <build_depend>example_interfaces</build_depend>
+  <build_depend>rcljava</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+
+  <exec_depend>rosidl_generator_java</exec_depend>
+  <exec_depend>example_interfaces</exec_depend>
+  <exec_depend>rcljava</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+
+  <export>
+    <build_type>ament_gradle</build_type>
+  </export>
+</package>
