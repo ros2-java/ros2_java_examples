@@ -17,11 +17,15 @@ package org.ros2.rcljava.examples.services;
 import org.ros2.rcljava.Node;
 import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.Service;
-import org.ros2.rcljava.ServiceConsumer;
+import org.ros2.rcljava.service.Service;
+import org.ros2.rcljava.service.ServiceConsumer;
 
 import example_interfaces.srv.AddTwoInts;
 
+/**
+ *
+ * @author Mickael Gaillard <mick.gaillard@gmail.com>
+ */
 public class AddTwoIntsServer {
     private static final String NODE_NAME = AddTwoIntsServer.class.getName();
 
@@ -54,7 +58,7 @@ public class AddTwoIntsServer {
                     handleAddTwoInts(request, response);
                 }
             },
-            QoSProfile.PROFILE_DEFAULT);
+            QoSProfile.PROFILE_SERVICES_DEFAULT);
 
         // Wait...
         RCLJava.spin(node);

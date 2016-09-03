@@ -20,6 +20,10 @@ import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.Subscription;
 
+/**
+ *
+ * @author Mickael Gaillard <mick.gaillard@gmail.com>
+ */
 public class ImuListener {
     private static final String NODE_NAME = Listener.class.getName();
 

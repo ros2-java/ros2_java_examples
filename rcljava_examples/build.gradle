@@ -1,6 +1,20 @@
 apply plugin: 'java'
+
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
+
+repositories {
+     jcenter()
+}
+
+ext.sharedManifest = manifest {
+    attributes('Implementation-Title': archivesBaseName,
+            'Implementation-Version': version,
+            'Built-By': System.getProperty('user.name'),
+            'Built-Date': new Date(),
+            'Built-JDK': System.getProperty('java.version')
+    )
+}
 
 sourceSets {
     main {
@@ -17,6 +31,7 @@ dependencies {
             compile fileTree(dir: [it, 'java'].join(File.separator), include: '*.jar')
         }
     }
+    testCompile 'junit:junit:4.12'
 }
 
 jar {
@@ -25,5 +40,8 @@ jar {
             [project.getProperty('ament.install_space'), 'share', 'rcljava_examples',
             'java'].join(File.separator)
         )
+    }
+    manifest = project.manifest {
+        from sharedManifest
     }
 }
