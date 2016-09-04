@@ -29,6 +29,7 @@ dependencies {
     if (project.hasProperty('ament.dependencies')) {
         project.getProperty('ament.dependencies').split(':').each {
             compile fileTree(dir: [it, 'java'].join(File.separator), include: '*.jar')
+            testCompile fileTree(dir: [it, 'lib'].join(File.separator), include: '*.jar')
         }
     }
     testCompile 'junit:junit:4.12'
@@ -43,5 +44,21 @@ jar {
     }
     manifest = project.manifest {
         from sharedManifest
+    }
+}
+
+test {
+    if (project.hasProperty('ament.install_space')) {
+        def current = project.getProperty('ament.install_space') + '/..'
+        def tree = fileTree(dir: current, include: '**/lib/*.so')
+        def tmp = ''
+
+        tree.visit{element ->
+            if (element.isDirectory() && element.name.endsWith('lib')) {
+                tmp += element.file.absolutePath + ":"
+            }
+        }
+
+        systemProperty "java.library.path", tmp + ":" + System.properties['java.library.path']
     }
 }
