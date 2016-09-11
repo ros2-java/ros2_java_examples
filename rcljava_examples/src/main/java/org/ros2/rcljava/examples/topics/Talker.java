@@ -23,7 +23,7 @@ public class Talker {
     private static final String NODE_NAME = Talker.class.getName();
 
     public static void main(String[] args) throws InterruptedException {
-        std_msgs.msg.String msg = new std_msgs.msg.String();
+
         int i = 1;
 
         // Initialize RCL
@@ -32,6 +32,7 @@ public class Talker {
         // Let's create a Node
         Node node = RCLJava.createNode(NODE_NAME);
 
+        std_msgs.msg.String msg = new std_msgs.msg.String();
         // Publishers are type safe, make sure to pass the message type
         Publisher<std_msgs.msg.String> chatter_pub =
                 node.<std_msgs.msg.String>createPublisher(
