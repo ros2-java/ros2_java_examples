@@ -14,6 +14,11 @@
  */
 package org.ros2.rcljava.examples.services;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 import org.ros2.rcljava.Node;
 import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
@@ -28,6 +33,7 @@ import example_interfaces.srv.AddTwoInts;
  */
 public class AddTwoIntsServer {
     private static final String NODE_NAME = AddTwoIntsServer.class.getName();
+    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
     public static void handleAddTwoInts(
             final example_interfaces.srv.AddTwoInts.Request request,
@@ -39,6 +45,12 @@ public class AddTwoIntsServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        logger.setLevel(Level.ALL);
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setFormatter(new SimpleFormatter());
+        logger.addHandler(handler);
+        handler.setLevel(Level.ALL);
+
         // Initialize RCL
         RCLJava.rclJavaInit();
 

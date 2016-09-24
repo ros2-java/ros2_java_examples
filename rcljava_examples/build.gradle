@@ -38,7 +38,7 @@ dependencies {
 jar {
     if (project.hasProperty('ament.install_space')) {
         destinationDir = file(
-            [project.getProperty('ament.install_space'), 'share', 'rcljava_examples',
+            [project.getProperty('ament.install_space'), 'share', project.name,
             'java'].join(File.separator)
         )
     }
