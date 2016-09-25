@@ -10,11 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.ros2.rcljava.NativeUtils;
-import org.ros2.rcljava.Node;
-import org.ros2.rcljava.Publisher;
 import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.service.Client;
+import org.ros2.rcljava.node.Node;
+import org.ros2.rcljava.node.service.Client;
+import org.ros2.rcljava.node.topic.Publisher;
 
 import example_interfaces.srv.AddTwoInts;
 

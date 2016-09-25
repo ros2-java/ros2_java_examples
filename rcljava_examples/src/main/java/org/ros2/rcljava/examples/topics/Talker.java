@@ -15,8 +15,8 @@
 package org.ros2.rcljava.examples.topics;
 
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.Node;
-import org.ros2.rcljava.Publisher;
+import org.ros2.rcljava.node.Node;
+import org.ros2.rcljava.node.topic.Publisher;
 import org.ros2.rcljava.QoSProfile;
 
 public class Talker {

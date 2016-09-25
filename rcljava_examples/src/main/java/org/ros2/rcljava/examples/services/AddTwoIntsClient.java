@@ -14,10 +14,10 @@
  */
 package org.ros2.rcljava.examples.services;
 
-import org.ros2.rcljava.INode;
 import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.service.Client;
+import org.ros2.rcljava.node.INode;
+import org.ros2.rcljava.node.service.Client;
 
 import example_interfaces.srv.AddTwoInts;
 
