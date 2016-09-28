@@ -27,7 +27,7 @@ public class Listener {
     System.out.println("I heard: " + msg.getData());
   }
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) throws InterruptedException, Exception {
     // Initialize RCL
     RCLJava.rclJavaInit();
 
