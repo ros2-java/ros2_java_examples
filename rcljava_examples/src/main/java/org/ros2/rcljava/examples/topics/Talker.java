@@ -33,7 +33,6 @@ public class Talker {
         Node node = RCLJava.createNode(NODE_NAME);
 
         std_msgs.msg.String msg = new std_msgs.msg.String();
-        // Publishers are type safe, make sure to pass the message type
         Publisher<std_msgs.msg.String> chatter_pub =
                 node.<std_msgs.msg.String>createPublisher(
                     std_msgs.msg.String.class,

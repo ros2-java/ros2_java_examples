@@ -30,9 +30,9 @@ public class ImuListener {
     private static void imuCb(final sensor_msgs.msg.Imu msg)
     {
         System.out.println(String.format(" accel: [%+6.3f %+6.3f %+6.3f]\n",
-            msg.getLinear_acceleration().getX(),
-            msg.getLinear_acceleration().getY(),
-            msg.getLinear_acceleration().getZ()));
+            msg.getLinearAcceleration().getX(),
+            msg.getLinearAcceleration().getY(),
+            msg.getLinearAcceleration().getZ()));
     }
 
     public static void main(String[] args) throws InterruptedException {
