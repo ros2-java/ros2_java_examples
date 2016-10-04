@@ -23,11 +23,13 @@ import org.ros2.rcljava.Subscription;
 
 public class Listener {
 
-  public static void chatterCallback(std_msgs.msg.String msg) {
+  public static void chatterCallback(final std_msgs.msg.String msg) {
     System.out.println("I heard: " + msg.getData());
   }
 
-  public static void main(String[] args) throws InterruptedException, Exception {
+  public static void main(final String[] args) throws InterruptedException,
+      Exception {
+
     // Initialize RCL
     RCLJava.rclJavaInit();
 
@@ -45,7 +47,7 @@ public class Listener {
             // too, but we use our own Consumer interface because Android
             // supports lambdas via retrolambda, but not the lambda API
             @Override
-            public void accept(std_msgs.msg.String msg) {
+            public void accept(final std_msgs.msg.String msg) {
               chatterCallback(msg);
             }
           }

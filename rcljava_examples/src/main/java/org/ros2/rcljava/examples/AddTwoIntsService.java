@@ -12,51 +12,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.ros2.rcljava.examples;
 
-import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.Node;
-import org.ros2.rcljava.Subscription;
-import org.ros2.rcljava.TriConsumer;
-import org.ros2.rcljava.Service;
+import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.RMWRequestId;
+import org.ros2.rcljava.Service;
+import org.ros2.rcljava.TriConsumer;
 
 
 public class AddTwoIntsService {
 
-    public static void main(String[] args) throws InterruptedException, Exception {
-        // Initialize RCL
-        RCLJava.rclJavaInit();
+  public static void main(final String[] args) throws InterruptedException,
+      Exception {
 
-        // Let's create a new Node
-        Node node = RCLJava.createNode("add_two_ints_server");
+    // Initialize RCL
+    RCLJava.rclJavaInit();
 
-        Service<example_interfaces.srv.AddTwoInts> service = node.<
-            example_interfaces.srv.AddTwoInts
+    // Let's create a new Node
+    Node node = RCLJava.createNode("add_two_ints_server");
+
+    Service<example_interfaces.srv.AddTwoInts> service = node.<
+        example_interfaces.srv.AddTwoInts
         >createService(
-            example_interfaces.srv.AddTwoInts.class, "add_two_ints", new TriConsumer<
-                RMWRequestId,
-                example_interfaces.srv.AddTwoInts_Request,
-                example_interfaces.srv.AddTwoInts_Response
-            >() {
+          example_interfaces.srv.AddTwoInts.class, "add_two_ints",
+          new TriConsumer<
+            RMWRequestId,
+            example_interfaces.srv.AddTwoInts_Request,
+            example_interfaces.srv.AddTwoInts_Response
+          >() {
 
-            // We define the callback inline, this works with Java 8's lambdas too, but we use
-            // our own Consumer interface because Android supports lambdas via retrolambda, but not
-            // the lambda API
-            @Override
-            public void accept(
-                RMWRequestId header,
-                example_interfaces.srv.AddTwoInts_Request request,
-                example_interfaces.srv.AddTwoInts_Response response
-            ) {
-                System.out.println("Incoming request");
-                System.out.println("a: " + request.getA() + " b: " + request.getB());
-                response.setSum(request.getA() + request.getB());
-            }
-        });
-
-        while(RCLJava.ok()) {
-            RCLJava.spinOnce(node);
+        // We define the callback inline, this works with Java 8's lambdas
+        // too, but we use our own TriConsumer interface because Android
+        // supports lambdas via retrolambda, but not the lambda API
+        @Override
+        public void accept(
+            final RMWRequestId header,
+            final example_interfaces.srv.AddTwoInts_Request request,
+            final example_interfaces.srv.AddTwoInts_Response response
+        ) {
+          System.out.println("Incoming request");
+          System.out.println(
+              "a: " + request.getA() + " b: " + request.getB());
+          response.setSum(request.getA() + request.getB());
         }
+      }
+    );
+
+    while (RCLJava.ok()) {
+      RCLJava.spinOnce(node);
     }
+  }
 }
