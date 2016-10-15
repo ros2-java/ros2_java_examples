@@ -4,6 +4,8 @@ plugins {
 
 apply plugin: 'org.ros2.rcljava'
 
+ament {generateEclipse=true}
+
 repositories {
      jcenter()
 }

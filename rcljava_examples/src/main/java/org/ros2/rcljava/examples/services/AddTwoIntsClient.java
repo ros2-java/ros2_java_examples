@@ -14,12 +14,15 @@
  */
 package org.ros2.rcljava.examples.services;
 
-import org.ros2.rcljava.QoSProfile;
+import java.util.concurrent.Future;
+
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.INode;
 import org.ros2.rcljava.node.service.Client;
 
 import example_interfaces.srv.AddTwoInts;
+import example_interfaces.srv.AddTwoInts_Request;
+import example_interfaces.srv.AddTwoInts_Response;
 
 /**
  *
@@ -27,8 +30,15 @@ import example_interfaces.srv.AddTwoInts;
  */
 public class AddTwoIntsClient {
     private static final String NODE_NAME = AddTwoIntsClient.class.getName();
+//    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
+//        logger.setLevel(Level.ALL);
+//        ConsoleHandler handler = new ConsoleHandler();
+//        handler.setFormatter(new SimpleFormatter());
+//        logger.addHandler(handler);
+//        handler.setLevel(Level.ALL);
+
         // Initialize RCL
         RCLJava.rclJavaInit();
 
@@ -36,29 +46,17 @@ public class AddTwoIntsClient {
         INode node = RCLJava.createNode(NODE_NAME);
 
         // Create client.
-        Client<AddTwoInts> client = node.<AddTwoInts>createClient(
-                AddTwoInts.class,
-                "add_two_ints",
-                QoSProfile.PROFILE_SERVICES_DEFAULT);
+        Client<AddTwoInts> client = node.<AddTwoInts>createClient(AddTwoInts.class, "add_two_ints");
 
         // Set request.
-        AddTwoInts.Request request = new AddTwoInts.Request();
+        AddTwoInts_Request request = new AddTwoInts_Request();
         request.setA(2);
         request.setB(3);
 
-        // Wait service are available.
-        while (!client.waitForService(1000)) {
-            if (!RCLJava.ok()) {
-                System.out.println("add_two_ints_client was interrupted while waiting for the service. Exiting.");
-                break;
-            }
-            System.out.println("service not available, waiting again...");
-        }
-
         // Call service...
-        AddTwoInts.Response result = client.<AddTwoInts.Request, AddTwoInts.Response>sendRequest(request);
-        if (result != null) {
-            System.out.println(String.format("Result of add_two_ints: %zd", result.getSum()));
+        Future<AddTwoInts_Response> future = client.sendRequest(request);
+        if (future != null) {
+            System.out.println(String.format("Result of add_two_ints: %d", future.get().getSum()));
         } else {
             System.out.println("add_two_ints_client was interrupted. Exiting.");
         }

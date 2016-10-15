@@ -14,18 +14,15 @@
  */
 package org.ros2.rcljava.examples.services;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
-import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
+import org.ros2.rcljava.RMWRequestId;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.service.Service;
-import org.ros2.rcljava.node.service.ServiceConsumer;
+import org.ros2.rcljava.node.service.TriConsumer;
 
 import example_interfaces.srv.AddTwoInts;
+import example_interfaces.srv.AddTwoInts_Request;
+import example_interfaces.srv.AddTwoInts_Response;
 
 /**
  *
@@ -33,23 +30,23 @@ import example_interfaces.srv.AddTwoInts;
  */
 public class AddTwoIntsServer {
     private static final String NODE_NAME = AddTwoIntsServer.class.getName();
-    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
+//    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
     public static void handleAddTwoInts(
-            final example_interfaces.srv.AddTwoInts.Request request,
-            example_interfaces.srv.AddTwoInts.Response response) {
+            final AddTwoInts_Request request,
+            final AddTwoInts_Response response) {
 
         System.out.println("Incoming request");
         System.out.println(String.format("a: %d b: %d", request.getA(), request.getB()));
         response.setSum(request.getA() + request.getB());
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        logger.setLevel(Level.ALL);
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setFormatter(new SimpleFormatter());
-        logger.addHandler(handler);
-        handler.setLevel(Level.ALL);
+    public static void main(String[] args) throws Exception {
+//        logger.setLevel(Level.ALL);
+//        ConsoleHandler handler = new ConsoleHandler();
+//        handler.setFormatter(new SimpleFormatter());
+//        logger.addHandler(handler);
+//        handler.setLevel(Level.ALL);
 
         // Initialize RCL
         RCLJava.rclJavaInit();
@@ -59,18 +56,23 @@ public class AddTwoIntsServer {
 
         // Create a service.
         Service<AddTwoInts> service = node.<AddTwoInts>createService(
-            AddTwoInts.class,
-            "add_two_ints",
-            new ServiceConsumer<AddTwoInts.Request, AddTwoInts.Response>() {
-                // We define the callback inline, this works with Java 8's lambdas too, but we use
-                // our own Consumer interface because Android supports lambdas via retrolambda, but not
-                // the lambda API
-                @Override
-                public void call(AddTwoInts.Request request, AddTwoInts.Response response) {
-                    handleAddTwoInts(request, response);
-                }
-            },
-            QoSProfile.PROFILE_SERVICES_DEFAULT);
+                AddTwoInts.class,
+                "add_two_ints",
+                new TriConsumer<RMWRequestId, AddTwoInts_Request, AddTwoInts_Response>() {
+
+                    // We define the callback inline, this works with Java 8's
+                    // lambdas
+                    // too, but we use our own TriConsumer interface because
+                    // Android
+                    // supports lambdas via retrolambda, but not the lambda API
+                    @Override
+                    public void accept(
+                            final RMWRequestId header,
+                            final AddTwoInts_Request request,
+                            final AddTwoInts_Response response) {
+                        AddTwoIntsServer.handleAddTwoInts(request, response);
+                    }
+                });
 
         // Wait...
         RCLJava.spin(node);

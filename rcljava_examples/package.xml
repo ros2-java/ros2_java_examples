@@ -18,7 +18,6 @@
   <build_depend>sensor_msgs</build_depend>
   <build_depend>example_interfaces</build_depend>
 
-  <exec_depend>rosidl_generator_java</exec_depend>
   <exec_depend>rcljava</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
