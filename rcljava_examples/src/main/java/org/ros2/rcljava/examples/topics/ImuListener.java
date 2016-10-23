@@ -25,7 +25,7 @@ import org.ros2.rcljava.node.topic.Subscription;
  * @author Mickael Gaillard <mick.gaillard@gmail.com>
  */
 public class ImuListener {
-    private static final String NODE_NAME = Listener.class.getName();
+    private static final String NODE_NAME = Listener.class.getSimpleName().toLowerCase();
 
     private static void imuCb(final sensor_msgs.msg.Imu msg)
     {

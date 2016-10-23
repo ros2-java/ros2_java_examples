@@ -21,10 +21,10 @@ import org.ros2.rcljava.node.topic.Subscription;
 import org.ros2.rcljava.QoSProfile;
 
 public class Listener {
-    private static final String NODE_NAME = Listener.class.getName();
+    private static final String NODE_NAME = Listener.class.getSimpleName().toLowerCase();
 
-    public static void chatterCallback(std_msgs.msg.String msg) {
-        System.out.println("I heard: " + msg.getData());
+    public static void chatterCallback(final std_msgs.msg.String msg) {
+        System.out.println("I heard: [" + msg.getData() + "]");
     }
 
     public static void main(String[] args) throws InterruptedException {

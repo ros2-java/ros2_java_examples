@@ -14,21 +14,21 @@
  */
 package org.ros2.rcljava.examples.parameters;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import org.ros2.rcljava.Node;
 import org.ros2.rcljava.QoSProfile;
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.parameter.ParameterVariant;
-import org.ros2.rcljava.parameter.SyncParametersClient;
+import org.ros2.rcljava.node.Node;
+import org.ros2.rcljava.node.parameter.ParameterVariant;
+import org.ros2.rcljava.node.parameter.SyncParametersClient;
 
 /**
  *
  * @author Mickael Gaillard <mick.gaillard@gmail.com>
  */
 public class SetAndGetParameters {
-    private static final String NODE_NAME = SetAndGetParameters.class.getName();
+    private static final String NODE_NAME = SetAndGetParameters.class.getSimpleName().toLowerCase();
 
     /**
      * @param args
@@ -40,17 +40,16 @@ public class SetAndGetParameters {
         // Let's create a new Node
         Node node = RCLJava.createNode(NODE_NAME);
 
-        // TODO(esteve): Make the parameter service automatically start with the node.
-//      ParameterService parameter_service = new ParameterService(node, QoSProfile.PROFILE_PARAMETER);
         SyncParametersClient parameters_client = new SyncParametersClient(node, QoSProfile.PROFILE_PARAMETER);
 
         // Set several different types of parameters.
-        ArrayList<rcl_interfaces.msg.SetParametersResult> set_parameters_results =
-            parameters_client.setParameters(Arrays.asList(
-                new ParameterVariant<Integer>("foo", 2),
-                new ParameterVariant<String>("bar", "hello"),
-                new ParameterVariant<Double>("baz", 1.45),
-                new ParameterVariant<Boolean>("foobar", true)
+        List<rcl_interfaces.msg.SetParametersResult> set_parameters_results =
+            parameters_client.setParameters(
+                    Arrays.<ParameterVariant<?>>asList(
+                        new ParameterVariant<Long>("foo", 2L),
+                        new ParameterVariant<String>("bar", "hello"),
+                        new ParameterVariant<Double>("baz", 1.45),
+                        new ParameterVariant<Boolean>("foobar", true)
         ));
         // Check to see if they were set.
         for (rcl_interfaces.msg.SetParametersResult result : set_parameters_results) {
@@ -60,10 +59,10 @@ public class SetAndGetParameters {
         }
 
         // Get a few of the parameters just set.
-        for (ParameterVariant<?> parameter : parameters_client.getParameters(Arrays.asList("foo", "baz"))) {
-            System.out.println(String.format("Parameter name: %s", parameter.getName()));
+        for (ParameterVariant<?> parameter : parameters_client.getParameters(Arrays.asList("foo", "baz"))) { //  "bar", "foobar"
             System.out.println(
-                    String.format("Parameter value (%s): %s",
+                    String.format("Parameter name %s = value (%s): %s",
+                        parameter.getName(),
                         parameter.getTypeName(),
                         parameter.valueToString()));
         }

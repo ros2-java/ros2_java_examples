@@ -29,7 +29,7 @@ import example_interfaces.srv.AddTwoInts_Response;
  * @author Mickael Gaillard <mick.gaillard@gmail.com>
  */
 public class AddTwoIntsClient {
-    private static final String NODE_NAME = AddTwoIntsClient.class.getName();
+    private static final String NODE_NAME = AddTwoIntsClient.class.getSimpleName().toLowerCase();
 //    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
     public static void main(String[] args) throws Exception {

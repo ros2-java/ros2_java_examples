@@ -20,7 +20,7 @@ import org.ros2.rcljava.node.topic.Publisher;
 import org.ros2.rcljava.QoSProfile;
 
 public class Talker {
-    private static final String NODE_NAME = Talker.class.getName();
+    private static final String NODE_NAME = Talker.class.getSimpleName().toLowerCase();
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -46,7 +46,7 @@ public class Talker {
             chatter_pub.publish(msg);
 
             // Sleep a little bit between each message
-            Thread.sleep(1000);
+            Thread.sleep(500);
             i++;
         }
 
