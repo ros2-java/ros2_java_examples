@@ -42,13 +42,14 @@ public class ListParameters {
         SyncParametersClient parameters_client = new SyncParametersClient(node, QoSProfile.PROFILE_PARAMETER);
 
         // Set several different types of parameters.
-        parameters_client.setParameters(Arrays.<ParameterVariant<?>>asList(
-                new ParameterVariant<Integer>("foo", 2),
-                new ParameterVariant<String>("bar", "hello"),
-                new ParameterVariant<Double>("baz", 1.45),
-                new ParameterVariant<Integer>("foo.first", 8),
-                new ParameterVariant<Integer>("foo.second", 42),
-                new ParameterVariant<Boolean>("foobar", true)
+        parameters_client.setParameters(
+                Arrays.<ParameterVariant<?>>asList(
+                    new ParameterVariant<Long>("foo", 2L),
+                    new ParameterVariant<String>("bar", "hello"),
+                    new ParameterVariant<Double>("baz", 1.45),
+                    new ParameterVariant<Long>("foo.first", 8L),
+                    new ParameterVariant<Long>("foo.second", 42L),
+                    new ParameterVariant<Boolean>("foobar", true)
         ));
 
         // List the details of a few parameters up to a namespace depth of 10.
