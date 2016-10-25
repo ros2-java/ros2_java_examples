@@ -17,7 +17,7 @@ package org.ros2.rcljava.examples.services;
 import java.util.concurrent.Future;
 
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.node.INode;
+import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.service.Client;
 
 import example_interfaces.srv.AddTwoInts;
@@ -43,7 +43,7 @@ public class AddTwoIntsClient {
         RCLJava.rclJavaInit();
 
         // Let's create a new Node
-        INode node = RCLJava.createNode(NODE_NAME);
+        Node node = RCLJava.createNode(NODE_NAME);
 
         // Create client.
         Client<AddTwoInts> client = node.<AddTwoInts>createClient(AddTwoInts.class, "add_two_ints");

@@ -10,13 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.ros2.rcljava.NativeUtils;
-import org.ros2.rcljava.QoSProfile;
+import org.ros2.rcljava.qos.QoSProfile;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.Node;
-import org.ros2.rcljava.node.service.Client;
 import org.ros2.rcljava.node.topic.Publisher;
 
-import example_interfaces.srv.AddTwoInts;
 
 public class SimpleTest {
     private static final String NODE_NAME = SimpleTest.class.getName();
@@ -50,7 +48,7 @@ public class SimpleTest {
                 node.<std_msgs.msg.String>createPublisher(
                     std_msgs.msg.String.class,
                     "chatter",
-                    QoSProfile.PROFILE_DEFAULT);
+                    QoSProfile.DEFAULT);
 
         std_msgs.msg.String msg = new std_msgs.msg.String();
         msg.setData("Hello World");

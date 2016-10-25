@@ -14,7 +14,7 @@
  */
 package org.ros2.rcljava.examples.topics;
 
-import org.ros2.rcljava.QoSProfile;
+import org.ros2.rcljava.qos.QoSProfile;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.topic.Consumer;
@@ -55,7 +55,7 @@ public class ImuListener {
                         ImuListener.imuCb(msg);
                     }
                 },
-                QoSProfile.PROFILE_SENSOR_DATA);
+                QoSProfile.SENSOR_DATA);
 
         RCLJava.spin(node);
 

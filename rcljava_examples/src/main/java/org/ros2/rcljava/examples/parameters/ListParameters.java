@@ -17,7 +17,7 @@ package org.ros2.rcljava.examples.parameters;
 import java.util.Arrays;
 
 import org.ros2.rcljava.node.Node;
-import org.ros2.rcljava.QoSProfile;
+import org.ros2.rcljava.qos.QoSProfile;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.parameter.ParameterVariant;
 import org.ros2.rcljava.node.parameter.SyncParametersClient;
@@ -39,7 +39,7 @@ public class ListParameters {
         // Let's create a new Node
         Node node = RCLJava.createNode(NODE_NAME);
 
-        SyncParametersClient parameters_client = new SyncParametersClient(node, QoSProfile.PROFILE_PARAMETER);
+        SyncParametersClient parameters_client = new SyncParametersClient(node, QoSProfile.PARAMETER);
 
         // Set several different types of parameters.
         parameters_client.setParameters(

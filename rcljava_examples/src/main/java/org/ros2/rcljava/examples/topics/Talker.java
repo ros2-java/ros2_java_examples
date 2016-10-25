@@ -17,7 +17,7 @@ package org.ros2.rcljava.examples.topics;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.topic.Publisher;
-import org.ros2.rcljava.QoSProfile;
+import org.ros2.rcljava.qos.QoSProfile;
 
 public class Talker {
     private static final String NODE_NAME = Talker.class.getSimpleName().toLowerCase();
@@ -37,7 +37,7 @@ public class Talker {
                 node.<std_msgs.msg.String>createPublisher(
                     std_msgs.msg.String.class,
                     "chatter",
-                    QoSProfile.PROFILE_DEFAULT);
+                    QoSProfile.DEFAULT);
 
         while(RCLJava.ok()) {
             msg.setData("Hello World: " + i);

@@ -17,7 +17,7 @@ package org.ros2.rcljava.examples.parameters;
 import java.util.Arrays;
 
 import org.ros2.rcljava.node.Node;
-import org.ros2.rcljava.QoSProfile;
+import org.ros2.rcljava.qos.QoSProfile;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.topic.Subscription;
 import org.ros2.rcljava.node.parameter.ParameterConsumer;
@@ -60,7 +60,7 @@ public class ParameterEvents {
         // Let's create a new Node
         Node node = RCLJava.createNode(NODE_NAME);
 
-        SyncParametersClient parameters_client = new SyncParametersClient(node, QoSProfile.PROFILE_PARAMETER);
+        SyncParametersClient parameters_client = new SyncParametersClient(node, QoSProfile.PARAMETER);
 
         // Setup callback for changes to parameters.
         Subscription<?> sub = parameters_client.onParameterEvent(new ParameterConsumer() {
