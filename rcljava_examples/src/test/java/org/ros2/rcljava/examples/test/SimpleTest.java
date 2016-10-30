@@ -1,13 +1,10 @@
 package org.ros2.rcljava.examples.test;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.ros2.rcljava.NativeUtils;
 import org.ros2.rcljava.qos.QoSProfile;
@@ -18,15 +15,11 @@ import org.ros2.rcljava.node.topic.Publisher;
 
 public class SimpleTest {
     private static final String NODE_NAME = SimpleTest.class.getName();
-    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
+    private static final Logger logger = LoggerFactory.getLogger(SimpleTest.class);
 
     @BeforeClass
     public static void setUp() {
-        logger.setLevel(Level.ALL);
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setFormatter(new SimpleFormatter());
-        logger.addHandler(handler);
-        handler.setLevel(Level.ALL);
+
     }
 
     /**
@@ -75,7 +68,7 @@ public class SimpleTest {
             msgLog.append(key);
             msgLog.append("\n");
         }
-        logger.fine("Native libraries : \n" + msgLog.toString());
+        logger.debug("Native libraries : \n" + msgLog.toString());
 
         // Sleep a little bit between each message
         try {
