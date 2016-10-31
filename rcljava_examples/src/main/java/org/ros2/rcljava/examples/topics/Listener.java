@@ -18,7 +18,6 @@ import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.topic.Consumer;
 import org.ros2.rcljava.node.topic.Subscription;
-import org.ros2.rcljava.qos.QoSProfile;
 
 public class Listener {
     private static final String NODE_NAME = Listener.class.getSimpleName().toLowerCase();
@@ -47,8 +46,7 @@ public class Listener {
                 public void accept(std_msgs.msg.String msg) {
                     Listener.chatterCallback(msg);
                 }
-            },
-            QoSProfile.DEFAULT);
+            });
 
         RCLJava.spin(node);
 
