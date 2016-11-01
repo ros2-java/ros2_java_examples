@@ -1,4 +1,5 @@
-/* Copyright 2016 Open Source Robotics Foundation, Inc.
+/* Copyright 2016 Esteve Fernandez <esteve@apache.org>
+ * Copyright 2016 Mickael Gaillard <mick.gaillard@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +16,17 @@
 package org.ros2.rcljava.examples.services;
 
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.RMWRequestId;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.service.Service;
 import org.ros2.rcljava.node.service.TriConsumer;
+import org.ros2.rcljava.node.service.RMWRequestId;
 
 import example_interfaces.srv.AddTwoInts;
 import example_interfaces.srv.AddTwoInts_Request;
 import example_interfaces.srv.AddTwoInts_Response;
 
-/**
- *
- * @author Mickael Gaillard <mick.gaillard@gmail.com>
- */
 public class AddTwoIntsServer {
     private static final String NODE_NAME = AddTwoIntsServer.class.getSimpleName().toLowerCase();
-//    private static Logger logger = Logger.getLogger(RCLJava.LOG_NAME);
 
     public static void handleAddTwoInts(
             final AddTwoInts_Request request,
@@ -42,11 +38,6 @@ public class AddTwoIntsServer {
     }
 
     public static void main(String[] args) throws Exception {
-//        logger.setLevel(Level.ALL);
-//        ConsoleHandler handler = new ConsoleHandler();
-//        handler.setFormatter(new SimpleFormatter());
-//        logger.addHandler(handler);
-//        handler.setLevel(Level.ALL);
 
         // Initialize RCL
         RCLJava.rclJavaInit();

@@ -1,4 +1,5 @@
-/* Copyright 2016 Open Source Robotics Foundation, Inc.
+/* Copyright 2016 Esteve Fernandez <esteve@apache.org>
+ * Copyright 2016 Mickael Gaillard <mick.gaillard@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +21,6 @@ import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.node.topic.Consumer;
 import org.ros2.rcljava.node.topic.Subscription;
 
-/**
- *
- * @author Mickael Gaillard <mick.gaillard@gmail.com>
- */
 public class ImuListener {
     private static final String NODE_NAME = Listener.class.getSimpleName().toLowerCase();
 
