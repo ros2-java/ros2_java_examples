@@ -31,8 +31,7 @@ public class ParameterEvents {
 
     private static void onParameterEvent(final rcl_interfaces.msg.ParameterEvent event)
     {
-        // TODO(wjwwood): The message should have an operator<<, which would replace all of this.
-        System.out.println("Parameter event: \nnew parameters: \n");
+        System.out.println("Parameter event:\n new parameters:");
         for (rcl_interfaces.msg.Parameter new_parameter : event.getNewParameters()) {
             System.out.println(String.format("  %s", new_parameter.getName()));
         }
@@ -42,7 +41,7 @@ public class ParameterEvents {
         }
         System.out.println(" deleted parameters:");
         for (rcl_interfaces.msg.Parameter deleted_parameter : event.getDeletedParameters()) {
-            System.out.println(String.format("  %S", deleted_parameter.getName()));
+            System.out.println(String.format("  %s", deleted_parameter.getName()));
         }
     }
 
@@ -60,7 +59,6 @@ public class ParameterEvents {
 
         // Setup callback for changes to parameters.
         Subscription<?> sub = parameters_client.onParameterEvent(new ParameterConsumer() {
-
             @Override
             public void onEvent(ParameterEvent event) {
                 ParameterEvents.onParameterEvent(event);
@@ -70,7 +68,7 @@ public class ParameterEvents {
         // Set several different types of parameters.
 //        ArrayList<rcl_interfaces.msg.SetParametersResult> set_parameters_results =
             parameters_client.setParameters(Arrays.<ParameterVariant<?>>asList(
-                new ParameterVariant<Integer>("foo", 2),
+                new ParameterVariant<Long>("foo", 2L),
                 new ParameterVariant<String>("bar", "hello"),
                 new ParameterVariant<Double>("baz", 1.45),
                 new ParameterVariant<Boolean>("foobar", true)
@@ -79,14 +77,15 @@ public class ParameterEvents {
         // Change the value of some of them.
 //        set_parameters_results =
             parameters_client.setParameters(Arrays.<ParameterVariant<?>>asList(
-                new ParameterVariant<Integer>("foo", 3),
-                new ParameterVariant<String>("bar", "world")
+                new ParameterVariant<Long>("foo", 3L),
+                new ParameterVariant<String>("bar", "world"),
+                new ParameterVariant<String>("foobar", null)
         ));
 
-        // TODO(wjwwood): Create and use delete_parameter
+        for (int i = 0; i < 6; i++) {
+            RCLJava.spinOnce(node);
+        }
 
-//        RCLJava.sleepFor(100);
-//        RCLJava.spinSome(node);
 
         sub.dispose();
         node.dispose();

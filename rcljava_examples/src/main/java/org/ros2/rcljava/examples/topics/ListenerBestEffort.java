@@ -55,5 +55,9 @@ public class ListenerBestEffort {
     while (RCLJava.ok()) {
       RCLJava.spinOnce(node);
     }
+
+    sub.dispose();
+    node.dispose();
+    RCLJava.shutdown();
   }
 }
