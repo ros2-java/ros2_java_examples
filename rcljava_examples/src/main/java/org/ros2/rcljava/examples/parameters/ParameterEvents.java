@@ -20,7 +20,7 @@ import java.util.Arrays;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.node.topic.Subscription;
-import org.ros2.rcljava.node.parameter.ParameterConsumer;
+import org.ros2.rcljava.node.parameter.ParameterEventConsumer;
 import org.ros2.rcljava.node.parameter.ParameterVariant;
 import org.ros2.rcljava.node.parameter.SyncParametersClient;
 
@@ -58,7 +58,7 @@ public class ParameterEvents {
         SyncParametersClient parameters_client = new SyncParametersClient(node);
 
         // Setup callback for changes to parameters.
-        Subscription<?> sub = parameters_client.onParameterEvent(new ParameterConsumer() {
+        Subscription<?> sub = parameters_client.onParameterEvent(new ParameterEventConsumer() {
             @Override
             public void onEvent(ParameterEvent event) {
                 ParameterEvents.onParameterEvent(event);
