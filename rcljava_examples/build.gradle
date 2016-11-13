@@ -1,14 +1,17 @@
 plugins {
-    id "org.ros2.rcljava" version "0.2.0"
+    id "org.ros2.rcljava" version "0.3.3"
 }
 
 apply plugin: 'org.ros2.rcljava'
 
-ament {generateEclipse=true}
-
 repositories {
      jcenter()
 }
+
 dependencies {
     testCompile 'junit:junit:4.12'
+}
+
+ament {
+    generateEclipse = true
 }
