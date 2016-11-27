@@ -1,5 +1,5 @@
 plugins {
-    id "org.ros2.rcljava" version "0.4.4"
+    id "org.ros2.rcljava" version "0.4.6"
 }
 
 apply plugin: 'org.ros2.rcljava'
@@ -14,4 +14,39 @@ dependencies {
 
 ament {
     generateEclipse = true
+
+    scripts {
+        list_parameters_java {
+            mainClassName = 'org.ros2.rcljava.examples.parameters.ListParameters'
+        }
+        parameter_events_java {
+            mainClassName = 'org.ros2.rcljava.examples.parameters.ParameterEvents'
+        }
+        set_and_get_parameters_java {
+            mainClassName = 'org.ros2.rcljava.examples.parameters.SetAndGetParameters'
+        }
+
+        add_two_ints_client_java {
+            mainClassName = 'org.ros2.rcljava.examples.services.AddTwoIntsClient'
+        }
+        add_two_ints_server_java {
+            mainClassName = 'org.ros2.rcljava.examples.services.AddTwoIntsServer'
+        }
+
+        imu_listener_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.ImuListener'
+        }
+        listener_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.Listener'
+        }
+        listener_best_effort_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.ListenerBestEffort'
+        }
+        talker_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.Talker'
+        }
+        talker_best_effort_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.TalkerBestEffort'
+        }
+    }
 }
