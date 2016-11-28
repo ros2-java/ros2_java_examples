@@ -1,19 +1,52 @@
-apply plugin: 'java'
-apply plugin: org.ros2.tools.gradle.AmentPlugin
+plugins {
+    id "org.ros2.rcljava" version "0.4.6"
+}
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+apply plugin: 'org.ros2.rcljava'
 
-buildscript {
-  repositories {
-    jcenter()
-    mavenCentral()
-    maven {
-      url "https://plugins.gradle.org/m2/"
+repositories {
+     jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+ament {
+    generateEclipse = true
+
+    scripts {
+        list_parameters_java {
+            mainClassName = 'org.ros2.rcljava.examples.parameters.ListParameters'
+        }
+        parameter_events_java {
+            mainClassName = 'org.ros2.rcljava.examples.parameters.ParameterEvents'
+        }
+        set_and_get_parameters_java {
+            mainClassName = 'org.ros2.rcljava.examples.parameters.SetAndGetParameters'
+        }
+
+        add_two_ints_client_java {
+            mainClassName = 'org.ros2.rcljava.examples.services.AddTwoIntsClient'
+        }
+        add_two_ints_server_java {
+            mainClassName = 'org.ros2.rcljava.examples.services.AddTwoIntsServer'
+        }
+
+        imu_listener_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.ImuListener'
+        }
+        listener_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.Listener'
+        }
+        listener_best_effort_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.ListenerBestEffort'
+        }
+        talker_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.Talker'
+        }
+        talker_best_effort_java {
+            mainClassName = 'org.ros2.rcljava.examples.topics.TalkerBestEffort'
+        }
     }
-  }
-
-  dependencies {
-    classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.1.0'
-  }
 }
