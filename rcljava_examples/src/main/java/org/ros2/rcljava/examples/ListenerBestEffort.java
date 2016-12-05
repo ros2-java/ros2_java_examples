@@ -15,11 +15,11 @@
 
 package org.ros2.rcljava.examples;
 
-import org.ros2.rcljava.Consumer;
-import org.ros2.rcljava.Node;
-import org.ros2.rcljava.qos.QoSProfile;
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.Subscription;
+import org.ros2.rcljava.consumers.Consumer;
+import org.ros2.rcljava.node.Node;
+import org.ros2.rcljava.qos.QoSProfile;
+import org.ros2.rcljava.subscription.Subscription;
 
 
 public class ListenerBestEffort {

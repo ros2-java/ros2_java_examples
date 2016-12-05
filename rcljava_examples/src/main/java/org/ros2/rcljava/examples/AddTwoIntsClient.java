@@ -15,9 +15,9 @@
 
 package org.ros2.rcljava.examples;
 
-import org.ros2.rcljava.Client;
-import org.ros2.rcljava.Node;
 import org.ros2.rcljava.RCLJava;
+import org.ros2.rcljava.client.Client;
+import org.ros2.rcljava.node.Node;
 
 import java.util.concurrent.Future;
 

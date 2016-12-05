@@ -15,11 +15,11 @@
 
 package org.ros2.rcljava.examples;
 
-import org.ros2.rcljava.Node;
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.RMWRequestId;
-import org.ros2.rcljava.Service;
-import org.ros2.rcljava.TriConsumer;
+import org.ros2.rcljava.consumers.TriConsumer;
+import org.ros2.rcljava.node.Node;
+import org.ros2.rcljava.service.RMWRequestId;
+import org.ros2.rcljava.service.Service;
 
 
 public class AddTwoIntsService {

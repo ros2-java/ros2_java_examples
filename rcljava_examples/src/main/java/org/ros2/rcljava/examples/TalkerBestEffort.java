@@ -15,10 +15,10 @@
 
 package org.ros2.rcljava.examples;
 
-import org.ros2.rcljava.Node;
-import org.ros2.rcljava.Publisher;
-import org.ros2.rcljava.qos.QoSProfile;
 import org.ros2.rcljava.RCLJava;
+import org.ros2.rcljava.node.Node;
+import org.ros2.rcljava.publisher.Publisher;
+import org.ros2.rcljava.qos.QoSProfile;
 
 
 public class TalkerBestEffort {
