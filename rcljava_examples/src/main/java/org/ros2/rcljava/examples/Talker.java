@@ -15,10 +15,13 @@
 
 package org.ros2.rcljava.examples;
 
+import java.util.concurrent.TimeUnit;
+
 import org.ros2.rcljava.RCLJava;
+import org.ros2.rcljava.concurrent.Callback;
 import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.publisher.Publisher;
-
+import org.ros2.rcljava.timer.WallTimer;
 
 public class Talker {
   public static void main(String[] args) throws InterruptedException {
@@ -30,21 +33,30 @@ public class Talker {
 
     // Publishers are type safe, make sure to pass the message type
     Publisher<std_msgs.msg.String> chatterPublisher =
-        node.<std_msgs.msg.String>createPublisher(
-        std_msgs.msg.String.class, "chatter");
+        node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "chatter");
 
-    std_msgs.msg.String msg = new std_msgs.msg.String();
+    WallTimer timer = node.createTimer(500, TimeUnit.MILLISECONDS, new Callback() {
+      private int count;
+      Publisher<std_msgs.msg.String> chatterPublisher;
+      private std_msgs.msg.String msg;
 
-    int i = 1;
+      public void call() {
+        msg.setData("Hello World: " + this.count);
+        this.count++;
+        System.out.println("Publishing: \"" + msg.getData() + "\"");
+        chatterPublisher.publish(msg);
+      }
+
+      private Callback init(int count, Publisher<std_msgs.msg.String> chatterPublisher) {
+        this.count = count;
+        this.chatterPublisher = chatterPublisher;
+        this.msg = new std_msgs.msg.String();
+        return this;
+      }
+    }.init(1, chatterPublisher));
 
     while (RCLJava.ok()) {
-      msg.setData("Hello World: " + i);
-      i++;
-      System.out.println("Publishing: \"" + msg.getData() + "\"");
-      chatterPublisher.publish(msg);
-
-      // Sleep a little bit between each message
-      Thread.sleep(1000);
+      RCLJava.spinOnce(node);
     }
   }
 }
