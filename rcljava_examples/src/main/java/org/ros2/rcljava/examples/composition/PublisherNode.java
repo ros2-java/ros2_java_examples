@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.ros2.rcljava.examples;
+package org.ros2.rcljava.examples.composition;
 
 import java.util.concurrent.TimeUnit;
 

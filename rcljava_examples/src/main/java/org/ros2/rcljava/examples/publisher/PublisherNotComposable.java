@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.ros2.rcljava.examples;
+package org.ros2.rcljava.examples.publisher;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,40 +23,29 @@ import org.ros2.rcljava.node.Node;
 import org.ros2.rcljava.publisher.Publisher;
 import org.ros2.rcljava.timer.WallTimer;
 
-public class Talker {
+public class PublisherNotComposable {
   public static void main(String[] args) throws InterruptedException {
     // Initialize RCL
     RCLJava.rclJavaInit();
 
     // Let's create a Node
-    Node node = RCLJava.createNode("talker");
+    Node node = RCLJava.createNode("minimal_publisher");
 
     // Publishers are type safe, make sure to pass the message type
-    Publisher<std_msgs.msg.String> chatterPublisher =
-        node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "chatter");
+    Publisher<std_msgs.msg.String> publisher =
+        node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "topic");
 
-    WallTimer timer = node.createTimer(500, TimeUnit.MILLISECONDS, new Callback() {
-      private int count;
-      Publisher<std_msgs.msg.String> chatterPublisher;
-      private std_msgs.msg.String msg;
+    std_msgs.msg.String message = new std_msgs.msg.String();
 
-      public void call() {
-        msg.setData("Hello World: " + this.count);
-        this.count++;
-        System.out.println("Publishing: \"" + msg.getData() + "\"");
-        chatterPublisher.publish(msg);
-      }
-
-      private Callback init(int count, Publisher<std_msgs.msg.String> chatterPublisher) {
-        this.count = count;
-        this.chatterPublisher = chatterPublisher;
-        this.msg = new std_msgs.msg.String();
-        return this;
-      }
-    }.init(1, chatterPublisher));
+    int publishCount = 0;
 
     while (RCLJava.ok()) {
-      RCLJava.spinOnce(node);
+      message.setData("Hello, world! " + publishCount);
+      publishCount++;
+      System.out.println("Publishing: [" + message.getData() + "]");
+      publisher.publish(message);
+      RCLJava.spinSome(node);
+      Thread.sleep(500);
     }
   }
 }

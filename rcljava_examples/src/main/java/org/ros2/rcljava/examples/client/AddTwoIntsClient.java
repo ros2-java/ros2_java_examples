@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.ros2.rcljava.examples;
+package org.ros2.rcljava.examples.client;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.client.Client;
@@ -21,21 +21,17 @@ import org.ros2.rcljava.node.Node;
 
 import java.util.concurrent.Future;
 
-
 public class AddTwoIntsClient {
-
-  public static void main(final String[] args) throws InterruptedException,
-      Exception {
-
+  public static void main(final String[] args) throws InterruptedException, Exception {
     // Initialize RCL
     RCLJava.rclJavaInit();
 
     // Let's create a new Node
-    Node node = RCLJava.createNode("add_two_ints_client");
+    Node node = RCLJava.createNode("minimal_client");
 
-    Client<example_interfaces.srv.AddTwoInts> client = node.<
-        example_interfaces.srv.AddTwoInts>createClient(
-          example_interfaces.srv.AddTwoInts.class, "add_two_ints");
+    Client<example_interfaces.srv.AddTwoInts> client =
+        node.<example_interfaces.srv.AddTwoInts>createClient(
+            example_interfaces.srv.AddTwoInts.class, "add_two_ints");
 
     example_interfaces.srv.AddTwoInts_Request request =
         new example_interfaces.srv.AddTwoInts_Request();
@@ -45,7 +41,8 @@ public class AddTwoIntsClient {
     Future<example_interfaces.srv.AddTwoInts_Response> future =
         client.asyncSendRequest(request);
 
-    System.out.println("Result of add_two_ints: " + future.get().getSum());
+    System.out.println(
+        "result of " + request.getA() + " + " + request.getB() + " = " + future.get().getSum());
 
     RCLJava.shutdown();
   }
