@@ -43,7 +43,7 @@ public class AddTwoIntsClient {
     request.setB(3);
 
     Future<example_interfaces.srv.AddTwoInts_Response> future =
-        client.sendRequest(request);
+        client.asyncSendRequest(request);
 
     System.out.println("Result of add_two_ints: " + future.get().getSum());
 
