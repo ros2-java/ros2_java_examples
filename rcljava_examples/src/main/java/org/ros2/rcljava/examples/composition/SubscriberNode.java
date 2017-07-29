@@ -17,17 +17,14 @@ package org.ros2.rcljava.examples.composition;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.consumers.Consumer;
-import org.ros2.rcljava.node.AbstractComposableNode;
+import org.ros2.rcljava.node.BaseComposableNode;
 import org.ros2.rcljava.subscription.Subscription;
 
-public class SubscriberNode extends AbstractComposableNode {
+public class SubscriberNode extends BaseComposableNode {
   private Subscription<std_msgs.msg.String> subscription;
 
   public SubscriberNode() {
     super("subscriber_node");
-  }
-
-  protected void setUp() {
     subscription = node.<std_msgs.msg.String>createSubscription(std_msgs.msg.String.class, "topic",
         msg -> System.out.println("Subscriber [" + msg.getData() + "]"));
   }

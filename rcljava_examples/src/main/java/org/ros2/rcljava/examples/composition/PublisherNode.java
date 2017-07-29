@@ -18,11 +18,11 @@ package org.ros2.rcljava.examples.composition;
 import java.util.concurrent.TimeUnit;
 
 import org.ros2.rcljava.RCLJava;
-import org.ros2.rcljava.node.AbstractComposableNode;
+import org.ros2.rcljava.node.BaseComposableNode;
 import org.ros2.rcljava.publisher.Publisher;
 import org.ros2.rcljava.timer.WallTimer;
 
-public class PublisherNode extends AbstractComposableNode {
+public class PublisherNode extends BaseComposableNode {
   private Publisher<std_msgs.msg.String> publisher;
 
   private WallTimer timer;
@@ -32,9 +32,6 @@ public class PublisherNode extends AbstractComposableNode {
   public PublisherNode() {
     super("publisher_node");
     this.count = 0;
-  }
-
-  protected void setUp() {
     this.publisher = node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "topic");
     this.timer = node.createTimer(500, TimeUnit.MILLISECONDS, this::onTimer);
   }

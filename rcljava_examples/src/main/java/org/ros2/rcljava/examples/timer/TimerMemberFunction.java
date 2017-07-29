@@ -19,18 +19,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.consumers.Consumer;
-import org.ros2.rcljava.node.AbstractComposableNode;
+import org.ros2.rcljava.node.BaseComposableNode;
 import org.ros2.rcljava.subscription.Subscription;
 import org.ros2.rcljava.timer.WallTimer;
 
-public class TimerMemberFunction extends AbstractComposableNode {
+public class TimerMemberFunction extends BaseComposableNode {
   private WallTimer timer;
 
   public TimerMemberFunction() {
     super("minimal_timer");
-  }
-
-  protected void setUp() {
     timer = node.createTimer(500, TimeUnit.MILLISECONDS, this ::timerCallback);
   }
 

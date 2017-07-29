@@ -17,17 +17,14 @@ package org.ros2.rcljava.examples.subscriber;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.consumers.Consumer;
-import org.ros2.rcljava.node.AbstractComposableNode;
+import org.ros2.rcljava.node.BaseComposableNode;
 import org.ros2.rcljava.subscription.Subscription;
 
-public class SubscriberLambda extends AbstractComposableNode {
+public class SubscriberLambda extends BaseComposableNode {
   private Subscription<std_msgs.msg.String> subscription;
 
   public SubscriberLambda() {
     super("minimal_subscriber");
-  }
-
-  protected void setUp() {
     subscription = node.<std_msgs.msg.String>createSubscription(std_msgs.msg.String.class, "topic",
         msg -> System.out.println("I heard: [" + msg.getData() + "]"));
   }

@@ -17,17 +17,14 @@ package org.ros2.rcljava.examples.subscriber;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.consumers.Consumer;
-import org.ros2.rcljava.node.AbstractComposableNode;
+import org.ros2.rcljava.node.BaseComposableNode;
 import org.ros2.rcljava.subscription.Subscription;
 
-public class SubscriberMemberFunction extends AbstractComposableNode {
+public class SubscriberMemberFunction extends BaseComposableNode {
   private Subscription<std_msgs.msg.String> subscription;
 
   public SubscriberMemberFunction() {
     super("minimal_subscriber");
-  }
-
-  protected void setUp() {
     subscription = node.<std_msgs.msg.String>createSubscription(
         std_msgs.msg.String.class, "topic", this ::topicCallback);
   }

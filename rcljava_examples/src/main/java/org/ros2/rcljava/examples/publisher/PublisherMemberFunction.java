@@ -19,11 +19,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.ros2.rcljava.RCLJava;
 import org.ros2.rcljava.concurrent.Callback;
-import org.ros2.rcljava.node.AbstractComposableNode;
+import org.ros2.rcljava.node.BaseComposableNode;
 import org.ros2.rcljava.publisher.Publisher;
 import org.ros2.rcljava.timer.WallTimer;
 
-public class PublisherMemberFunction extends AbstractComposableNode {
+public class PublisherMemberFunction extends BaseComposableNode {
   private int count;
 
   private Publisher<std_msgs.msg.String> publisher;
@@ -33,9 +33,6 @@ public class PublisherMemberFunction extends AbstractComposableNode {
   public PublisherMemberFunction() {
     super("minmal_publisher");
     this.count = 0;
-  }
-
-  protected void setUp() {
     // Publishers are type safe, make sure to pass the message type
     this.publisher = node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "topic");
     this.timer = node.createTimer(500, TimeUnit.MILLISECONDS, this ::timerCallback);
