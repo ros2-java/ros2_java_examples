@@ -29,7 +29,7 @@ public class TimerLambda extends BaseComposableNode {
   public TimerLambda() {
     super("minimal_timer");
     Callback timerCallback = () -> System.out.println("Hello, world!");
-    timer = node.createTimer(500, TimeUnit.MILLISECONDS, timerCallback);
+    timer = node.createWallTimer(500, TimeUnit.MILLISECONDS, timerCallback);
   }
 
   public static void main(final String[] args) throws InterruptedException, Exception {

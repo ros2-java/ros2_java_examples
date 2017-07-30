@@ -42,7 +42,7 @@ public class PublisherLambda extends BaseComposableNode {
       System.out.println("Publishing: [" + message.getData() + "]");
       this.publisher.publish(message);
     };
-    this.timer = node.createTimer(500, TimeUnit.MILLISECONDS, timerCallback);
+    this.timer = node.createWallTimer(500, TimeUnit.MILLISECONDS, timerCallback);
   }
 
   public static void main(String[] args) throws InterruptedException {

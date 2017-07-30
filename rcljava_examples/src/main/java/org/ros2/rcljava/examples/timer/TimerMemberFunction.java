@@ -28,7 +28,7 @@ public class TimerMemberFunction extends BaseComposableNode {
 
   public TimerMemberFunction() {
     super("minimal_timer");
-    timer = node.createTimer(500, TimeUnit.MILLISECONDS, this ::timerCallback);
+    timer = node.createWallTimer(500, TimeUnit.MILLISECONDS, this ::timerCallback);
   }
 
   private void timerCallback() {

@@ -33,7 +33,7 @@ public class PublisherNode extends BaseComposableNode {
     super("publisher_node");
     this.count = 0;
     this.publisher = node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "topic");
-    this.timer = node.createTimer(500, TimeUnit.MILLISECONDS, this::onTimer);
+    this.timer = node.createWallTimer(500, TimeUnit.MILLISECONDS, this::onTimer);
   }
 
   private void onTimer() {

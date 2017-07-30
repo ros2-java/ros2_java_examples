@@ -35,7 +35,7 @@ public class PublisherMemberFunction extends BaseComposableNode {
     this.count = 0;
     // Publishers are type safe, make sure to pass the message type
     this.publisher = node.<std_msgs.msg.String>createPublisher(std_msgs.msg.String.class, "topic");
-    this.timer = node.createTimer(500, TimeUnit.MILLISECONDS, this ::timerCallback);
+    this.timer = node.createWallTimer(500, TimeUnit.MILLISECONDS, this ::timerCallback);
   }
 
   private void timerCallback() {
