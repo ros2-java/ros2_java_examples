@@ -1,5 +1,5 @@
 apply plugin: 'java'
-apply plugin: org.ros2.tools.gradle.AmentPlugin
+apply plugin: 'org.ros2.tools.gradle'
 apply plugin: 'me.tatarka.retrolambda'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -16,11 +16,31 @@ buildscript {
   }
 
   dependencies {
-    classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.5.1'
+    classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.6.1'
     classpath 'me.tatarka:gradle-retrolambda:3.6.1'
   }
 }
 
 repositories {
    mavenCentral()
+}
+
+// Use the same syntax as the entry points for the Python examples
+ament {
+    entryPoints {
+        consoleScripts = [
+            'add_two_ints_client = org.ros2.rcljava.examples.client.AddTwoIntsClient',
+            'subscriber_node = org.ros2.rcljava.examples.composition.SubscriberNode',
+            'publisher_node = org.ros2.rcljava.examples.composition.PublisherNode',
+            'publisher_not_composable = org.ros2.rcljava.examples.publisher.PublisherNotComposable',
+            'publisher_lambda = org.ros2.rcljava.examples.publisher.PublisherLambda',
+            'publisher_member_function = org.ros2.rcljava.examples.publisher.PublisherMemberFunction',
+            'add_two_ints_service = org.ros2.rcljava.examples.service.AddTwoIntsService',
+            'subscriber_not_composable = org.ros2.rcljava.examples.subscriber.SubscriberNotComposable',
+            'subscriber_lambda = org.ros2.rcljava.examples.subscriber.SubscriberLambda',
+            'subscriber_member_function = org.ros2.rcljava.examples.subscriber.SubscriberMemberFunction',
+            'timer_lambda = org.ros2.rcljava.examples.timer.TimerLambda',
+            'timer_member_function = org.ros2.rcljava.examples.timer.TimerMemberFunction'
+        ]
+    }
 }
