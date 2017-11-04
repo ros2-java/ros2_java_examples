@@ -16,7 +16,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.6.1'
+    classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.7.0'
     classpath 'me.tatarka:gradle-retrolambda:3.6.1'
   }
 }
