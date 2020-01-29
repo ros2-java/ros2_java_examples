@@ -50,6 +50,6 @@ public class PublisherMemberFunction extends BaseComposableNode {
     // Initialize RCL
     RCLJava.rclJavaInit();
 
-    RCLJava.spin(new PublisherLambda());
+    RCLJava.spin(new PublisherMemberFunction());
   }
 }
