@@ -38,11 +38,13 @@ public class AddTwoIntsClient {
     request.setA(2);
     request.setB(3);
 
-    Future<example_interfaces.srv.AddTwoInts_Response> future =
-        client.asyncSendRequest(request);
+    if (client.waitForService()) {
+      Future<example_interfaces.srv.AddTwoInts_Response> future =
+          client.asyncSendRequest(request);
 
-    System.out.println(
-        "result of " + request.getA() + " + " + request.getB() + " = " + future.get().getSum());
+      System.out.println(
+          "result of " + request.getA() + " + " + request.getB() + " = " + future.get().getSum());
+    }
 
     RCLJava.shutdown();
   }
