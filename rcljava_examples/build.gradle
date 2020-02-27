@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'org.ros2.tools.gradle'
-apply plugin: 'me.tatarka.retrolambda'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -17,7 +16,6 @@ buildscript {
 
   dependencies {
     classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.7.0'
-    classpath 'me.tatarka:gradle-retrolambda:3.6.1'
   }
 }
 
