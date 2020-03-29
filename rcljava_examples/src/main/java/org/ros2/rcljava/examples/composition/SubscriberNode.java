@@ -28,4 +28,10 @@ public class SubscriberNode extends BaseComposableNode {
     subscription = node.<std_msgs.msg.String>createSubscription(std_msgs.msg.String.class, "topic",
         msg -> System.out.println("Subscriber [" + msg.getData() + "]"));
   }
+
+  public static void main(String[] args) throws InterruptedException {
+    // Initialize RCL
+    RCLJava.rclJavaInit();
+    RCLJava.spin(new SubscriberNode());
+  }
 }

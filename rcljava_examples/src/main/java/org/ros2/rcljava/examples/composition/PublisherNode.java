@@ -43,4 +43,10 @@ public class PublisherNode extends BaseComposableNode {
     System.out.println("Publisher: [" + msg.getData() + "]");
     PublisherNode.this.publisher.publish(msg);
   }
+
+  public static void main(String[] args) throws InterruptedException {
+    // Initialize RCL
+    RCLJava.rclJavaInit();
+    RCLJava.spin(new PublisherNode());
+  }
 }
