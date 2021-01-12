@@ -32,6 +32,16 @@ public class AddTwoIntsClient {
     Client<example_interfaces.srv.AddTwoInts> client =
         node.<example_interfaces.srv.AddTwoInts>createClient(
             example_interfaces.srv.AddTwoInts.class, "add_two_ints");
+    
+    // Wait for client to fully initiliased and find the service
+    while(!client.waitForService(Duration.ofSeconds(1))) {
+      if(!RCLJava.ok()) {
+        System.out.println("client interrupted while waiting for service to appear.");
+        return;
+      }
+
+      System.out.println("waiting for service to appear...");
+    }
 
     example_interfaces.srv.AddTwoInts_Request request =
         new example_interfaces.srv.AddTwoInts_Request();
