@@ -17,6 +17,7 @@ buildscript {
   dependencies {
     classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.7.0'
   }
+
 }
 
 repositories {
@@ -41,4 +42,13 @@ ament {
             'timer_member_function = org.ros2.rcljava.examples.timer.TimerMemberFunction'
         ]
     }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
 }
