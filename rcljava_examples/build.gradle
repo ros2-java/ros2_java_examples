@@ -17,7 +17,6 @@ buildscript {
   dependencies {
     classpath 'gradle.plugin.org.ros2.tools.gradle:ament:0.7.0'
   }
-
 }
 
 repositories {
@@ -46,6 +45,8 @@ ament {
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
+    destinationDir = new java.io.File(ament.installSpace + "/share/" + ament.packageManifestName +
+                                      "/java")
     from sourceSets.main.allSource
 }
 
